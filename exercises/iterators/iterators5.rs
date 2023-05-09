@@ -2,13 +2,15 @@
 // Let's define a simple model to track Rustlings exercise progress. Progress
 // will be modelled using a hash map. The name of the exercise is the key and
 // the progress is the value. Two counting functions were created to count the
-// number of exercises with a given progress. Recreate this counting
-// functionality using iterators. Try not to use imperative loops (for, while).
-// Only the two iterator methods (count_iterator and count_collection_iterator)
-// need to be modified.
+// number of exercises with a given progress. These counting functions use
+// imperative style for loops. Recreate this counting functionality using
+// iterators. Only the two iterator methods (count_iterator and
+// count_collection_iterator) need to be modified.
 // Execute `rustlings hint iterators5` or use the `hint` watch subcommand for a hint.
+//
+// Make the code compile and the tests pass.
 
-// I AM NOT DONE
+// I AM DONE
 
 use std::collections::HashMap;
 
@@ -32,7 +34,8 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
     // map is a hashmap with String keys and Progress values.
     // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+    map.values().filter(|&x| *x == value).count()
+    // todo!();
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -51,7 +54,11 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection is a slice of hashmaps.
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
+    collection
+        .iter()
+        .map(|xx| xx.values().filter(|&x| *x == value).count())
+        .sum()
+    // todo!();
 }
 
 #[cfg(test)]
